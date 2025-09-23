@@ -1,4 +1,4 @@
-package object Comparador {
+package object Comparador{
   type AlgoritmoOrd[T] = List[T] => (List[T], Int)
   type Comparador[T] = (T, T) => Boolean
 
@@ -11,9 +11,9 @@ package object Comparador {
       } else{
 
         if (comp(e, l.head)) {
-          ordenar(e, l.tail, comp, counter + 1, l.head :: prevList)
+          (prevList ++ (e :: l), counter + 1)
         } else {
-          (prevList ++(e::l), counter)
+          ordenar(e, l.tail, comp, counter + 1, prevList ++ List(l.head))
         }
 
       }
@@ -22,7 +22,6 @@ package object Comparador {
   }
 
   def insertionSort[T](comp: Comparador[T]): AlgoritmoOrd[T] ={
-
 
     def AlgoritmoOrd(l:List[T]): (List[T], Int) = {
 
@@ -49,8 +48,8 @@ package object Comparador {
       if(l3.isEmpty){
         (l1, l2, counter)
       }else{
-        if(comp(l3.head, v)) ordenar(l1, (l3.head)::l2, l3.tail, v, counter+1, comp)
-        else ordenar((l3.head)::l1, l2, l3.tail, v, counter+1, comp)
+        if(comp(l3.head, v)) ordenar((l3.head)::l1, l2, l3.tail, v, counter+1, comp)
+        else ordenar(l1, (l3.head)::l2, l3.tail, v, counter+1, comp)
       }
 
     }
@@ -86,24 +85,24 @@ package object Comparador {
 
 
   def comparar[T](a1:AlgoritmoOrd[T] , a2:AlgoritmoOrd[T] , l : List [T]):( Int , Int) = {
-    
+
     val output1 = a1(l)
     val output2 = a2(l)
-    
+
     val l1 = output1._1
     val l2 = output2._1
-    
+
     val int1 = output1._2
     val int2 = output2._2
-    
-    
-    
+
+
+
     def sonIguales (l1 : List[T], l2 : List[T]): (Int, Int) = {
-      
+
       if(l1.isEmpty){
         return (int1, int2)
       }
-      
+
       if(l1.head == l2.head) sonIguales(l1.tail, l2.tail)
       else{
         (-1,-1)
