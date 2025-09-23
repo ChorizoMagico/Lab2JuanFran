@@ -85,5 +85,33 @@ package object Comparador {
   }
 
 
+  def comparar[T](a1:AlgoritmoOrd[T] , a2:AlgoritmoOrd[T] , l : List [T]):( Int , Int) = {
+    
+    val output1 = a1(l)
+    val output2 = a2(l)
+    
+    val l1 = output1._1
+    val l2 = output2._1
+    
+    val int1 = output1._2
+    val int2 = output2._2
+    
+    
+    
+    def sonIguales (l1 : List[T], l2 : List[T]): (Int, Int) = {
+      
+      if(l1.isEmpty){
+        return (int1, int2)
+      }
+      
+      if(l1.head == l2.head) sonIguales(l1.tail, l2.tail)
+      else{
+        (-1,-1)
+      }
+    }
+
+    sonIguales(l1, l2)
+  }
+
 
 }
