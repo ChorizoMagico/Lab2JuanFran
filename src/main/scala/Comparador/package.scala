@@ -70,7 +70,8 @@ package object Comparador{
 
     }
 
-    ordenar(List(), List(), l.tail, v, 0, comp) //Se llama a la función, siendo el pivote el primer elemento de la lista y la lista original o sobrante el resto (o la cola)
+    if (l.isEmpty) (List(), List(), 1)
+    else ordenar(List(), List(), l.tail, v, 0, comp) //Se llama a la función, siendo el pivote el primer elemento de la lista y la lista original o sobrante el resto (o la cola)
 
   }
 
